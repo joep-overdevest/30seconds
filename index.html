@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>30 Seconds Kaart</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      text-align: center;
+      padding: 40px;
+    }
+    .kaart {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      font-size: 20px;
+      margin: 10px 0;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #007bff;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<div class="kaart">
+  <h1>🎲 30 Seconds</h1>
+  <ul id="woorden"></ul>
+  <button onclick="nieuweKaart()">Volgende kaart</button>
+</div>
+
+<script>
+  const kaarten = [
+    ["Hond", "Auto", "Strand", "Pizza", "School"],
+    ["Bier", "Voetbal", "Vakantie", "Tentamen", "Trein"],
+    ["Sneeuw", "Skiën", "Berg", "Chocolade", "Hotel"],
+    ["Laptop", "Telefoon", "Wifi", "Oplader", "App"],
+    ["Festival", "Tent", "Muziek", "Modder", "Zon"]
+  ];
+
+  let gebruikteKaarten = [];
+  let huidigeKaart = null;
+
+  function nieuweKaart() {
+    if (gebruikteKaarten.length === kaarten.length) {
+      alert("Alle kaarten zijn op!");
+      return;
+    }
+
+    let index;
+    do {
+      index = Math.floor(Math.random() * kaarten.length);
+    } while (gebruikteKaarten.includes(index));
+
+    gebruikteKaarten.push(index);
+    huidigeKaart = kaarten[index];
+
+    const lijst = document.getElementById("woorden");
+    lijst.innerHTML = "";
+
+    huidigeKaart.forEach(woord => {
+      const li = document.createElement("li");
+      li.textContent = woord;
+      lijst.appendChild(li);
+    });
+  }
+
+  // Automatisch eerste kaart tonen
+  nieuweKaart();
+</script>
+
+</body>
+</html>
